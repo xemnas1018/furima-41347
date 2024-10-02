@@ -4,7 +4,6 @@
 |------------------|-------|---------------|
 |nickname          |string |null: false    |
 |email             |string |null: false    |
-|password          |string |null: false    |
 |encrypted_password|string |null: false    |
 |first_name        |string |null: false    |
 |last_name         |string |null: false    |
@@ -20,52 +19,53 @@
   
 |Column               |Type      |Options                      |
 |---------------------|----------|-----------------------------|
-|item                 |string    |null: false                  |
+|name                 |string    |null: false                  |
 |item_comment         |text      |null: false                  |
 |category_id          |integer   |null: false                  |
 |item_status_id       |integer   |null: false                  |
 |shipping_fee_id      |integer   |null: false                  |
-|ship_from_id         |integer   |null: false                  |
+|prefectures_id       |integer   |null: false                  |
 |shipping_time_id     |integer   |null: false                  |
 |price                |integer   |null: false                  |
-|user_id              |references|null: false,foreign_key: true|
+|user                 |references|null: false,foreign_key: true|
 ※商品画像はActiveStorageを使用の為未記入。
 ※user_id以外の〇〇_idカラムはActiveHashを使用。  
   
 ### Association
 * belongs_to :user  
-* belongs_to :sipping  
 * has_one :history  
 * belongs_to :category  
 * belongs_to :item_status  
 * belongs_to :shipping_fee  
-* belongs_to :ship_from  
+* belongs_to :prefecture 
 * belongs_to :shipping_time  
   
 ## shippings
   
 |Column            |Type   |Options                      |
 |------------------|-------|-----------------------------|
-|postal_code       |integer|null: false                  |
-|prefectures       |text   |null: false                  |
+|postal_code       |string |null: false                  |
+|prefectures_id    |integer|null: false                  |
 |address           |string |null: false                  |
 |house_num         |string |null: false                  |
 |building_name     |string |                             |
-|phone_num         |integer|null: false                  |
+|phone_num         |string |null: false                  |
 
 ### Association
-* has_many :items  
+* has_many :histories  
+* belongs_to :prefecture
   
 ## histories
   
 |Column            |Type      |Options                      |
 |------------------|----------|-----------------------------|
-|item_id           |references|null: false,foreign_key: true|
-|user_id           |references|null: false,foreign_key: true|
+|item              |references|null: false,foreign_key: true|
+|user              |references|null: false,foreign_key: true|
 
 ### Association
 * belongs_to :item  
-* has_one :user  
+* belongs_to :user  
+* belongs_to :shipping
   
 ## category(ActiveHash)  
   
@@ -112,7 +112,7 @@
 ### Association  
 * has_many :items  
   
-## ship_from(ActiveHash)  
+## prefectures(ActiveHash)  
   
 |id|name        |
 |--|------------|
@@ -167,6 +167,7 @@
   
 ### Association  
 * has_many :items  
+* has_many :shippings
   
 ## shipping_time(ActiveHash)  
   
