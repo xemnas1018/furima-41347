@@ -27,13 +27,15 @@
 |prefecture_id        |integer   |null: false                  |
 |shipping_time_id     |integer   |null: false                  |
 |price                |integer   |null: false                  |
-|user                 |references|null: false,foreign_key: true|
+|user                 |references|null: false,foreign_key: true|  
+  
+
 ※商品画像はActiveStorageを使用の為未記入。
 ※user_id以外の〇〇_idカラムはActiveHashを使用。  
   
 ### Association
 * belongs_to :user  
-* belongs_to :history  
+* has_one :history  
   
 ### ActiveHash  
 * belongs_to :category  
@@ -55,7 +57,7 @@
 |history           |references|null: false, foreign_key: true|
 
 ### Association
-* has_one :history  
+* belongs_to :history  
   
 ### ActiveHash  
 * belongs_to :prefecture
@@ -68,9 +70,9 @@
 |user              |references|null: false,foreign_key: true|
 
 ### Association
-* has_one :item  
+* belongs_to :item  
 * belongs_to :user  
-* belongs_to :shipping
+* has_one :shipping
   
 ## category(ActiveHash)  
   
