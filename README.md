@@ -34,6 +34,8 @@
 ### Association
 * belongs_to :user  
 * belongs_to :history  
+  
+### ActiveHash  
 * belongs_to :category  
 * belongs_to :item_status  
 * belongs_to :shipping_fee  
@@ -54,6 +56,8 @@
 
 ### Association
 * has_one :history  
+  
+### ActiveHash  
 * belongs_to :prefecture
   
 ## histories
@@ -64,7 +68,7 @@
 |user              |references|null: false,foreign_key: true|
 
 ### Association
-* belongs_to :item  
+* has_one :item  
 * belongs_to :user  
 * belongs_to :shipping
   
