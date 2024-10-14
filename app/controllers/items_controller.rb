@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
   # before_action :move_to_index, exsept: [:index]
 
+  def new
+    @item = Item.new 
+  end
+
   private
 
   def move_to_index
