@@ -33,11 +33,11 @@
 ※商品画像はActiveStorageを使用の為未記入。
 ※user_id以外の〇〇_idカラムはActiveHashを使用。  
   
-### Association
-* belongs_to :user  
+### Association 
+* belongs_to :user  設定済  
 * has_one :history  
   
-### ActiveHash  
+### ActiveHash  設定済み
 * belongs_to :category  
 * belongs_to :item_status  
 * belongs_to :shipping_fee  

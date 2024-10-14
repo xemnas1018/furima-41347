@@ -1,4 +1,4 @@
-class Item_status < Active_hash::Base
+class Item_status < ActiveHash::Base
   self.data = [
     { id: 1, name: "---"},
     { id: 2, name: "新品・未使用"},
@@ -7,4 +7,7 @@ class Item_status < Active_hash::Base
     { id: 5, name: "やや傷や汚れあり"},
     { id: 6, name: "全体的に状態が悪い"}
   ]
+
+  include ActiveHash::Associations
+  has_many :items
 end
