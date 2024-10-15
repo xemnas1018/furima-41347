@@ -1,16 +1,24 @@
 class ItemsController < ApplicationController
-  # before_action :move_to_index, exsept: [:index]
+  before_action :move_to_index, except: [:index, :sign_up, :sign_in]
   def index
   
   end
 
   def new
-    @item = Item.new 
+    if user_signed_in?
+      @item = Item.new 
+    else
+      redirect_to action: :index
+    end
   end
 
   def create
     @item = Item.create(item_params)
-    redirect_to "/"
+    if @item.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end    
   end
 
   private
