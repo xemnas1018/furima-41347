@@ -12,4 +12,8 @@ class User < ApplicationRecord
   validates_format_of :first_name, :last_name, with: NAME_REGEX, message: 'は全角文字で入力して下さい'
   KANA_NAME_REGEX = /\A[ァ-ヶー]+\z/
   validates_format_of :first_name_kana, :last_name_kana, with: KANA_NAME_REGEX, message: 'は全角カタカナで入力して下さい'
+
+  #アソシエーション
+  has_many :items
+
 end

@@ -4,8 +4,10 @@ class Item < ApplicationRecord
   belongs_to :item_status
   belongs_to :prefecture
   belongs_to :shipping_fee
-  belongs_to :Shipping_time
+  belongs_to :shipping_time
+  
   belongs_to :user
+  has_one_attached :image
 
   validates :name, :item_comment, :price, presence: true
 
