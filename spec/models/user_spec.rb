@@ -37,31 +37,31 @@ RSpec.describe User, type: :model do
         @user.password = ''
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password can't be blank", "Password は半角英数字の両方を含めて設定して下さい")
+        expect(@user.errors.full_messages).to include("Password can't be blank", 'Password は半角英数字の両方を含めて設定して下さい')
       end
       it 'パスワードが5文字以下では登録できない' do
         @user.password = '1111a'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'パスワードが半角数字のみでは場合は登録できない' do
         @user.password = '111111'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password は半角英数字の両方を含めて設定して下さい")
+        expect(@user.errors.full_messages).to include('Password は半角英数字の両方を含めて設定して下さい')
       end
       it 'パスワードが半角英字のみでは場合は登録できない' do
         @user.password = 'aaaaaa'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password は半角英数字の両方を含めて設定して下さい")
+        expect(@user.errors.full_messages).to include('Password は半角英数字の両方を含めて設定して下さい')
       end
       it 'パスワードに全角を含む場合は登録できない' do
         @user.password = 'ＡＡＡＡＡ１'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password は半角英数字の両方を含めて設定して下さい")
+        expect(@user.errors.full_messages).to include('Password は半角英数字の両方を含めて設定して下さい')
       end
       it 'パスワードとパスワード(確認)が異なる場合は登録できない' do
         @user.password_confirmation = '22222b'
