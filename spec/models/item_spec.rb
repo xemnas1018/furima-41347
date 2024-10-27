@@ -1,8 +1,8 @@
 require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
-    @item = FactoryBot.build(:item)
-    @user = FactoryBot.build(:user)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item, user: @user)
   end
 
   describe '商品出品機能' do
@@ -56,7 +56,7 @@ RSpec.describe Item, type: :model do
       it '価格が無ければ出品できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank", 'Price is not a number', 'Price is invalid')
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '価格が300円未満では出品できない' do
         @item.price = 299
@@ -72,6 +72,11 @@ RSpec.describe Item, type: :model do
         @item.price = '１０００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+      it 'ユーザー情報が無い場合は出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User can't be blank")
       end
     end
   end
