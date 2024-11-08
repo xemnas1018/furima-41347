@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
+  before_action :item_find_instance, only: [:edit, :update, :show]
   before_action :matched_user_id, only: [:edit, :update]
   before_action :move_to_session, only: [:new]
-  before_action :item_find_instance, only: [:edit, :update, :show]
+
   def index
     @items = Item.all.order('created_at DESC')
   end
