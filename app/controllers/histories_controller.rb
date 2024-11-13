@@ -1,18 +1,25 @@
 class HistoriesController < ApplicationController
   def index
+    @history_shipping = HistoryShipping.new
   end
 
-  def new 
-    @history_shipping = HisstoryShipping.new
-  end
 
   def create
-    @history_shipping = HisstoryShipping.new(hisstory_params)
+    @history_shipping = HistoryShipping.new(history_params)
+    #binding.pry
+    if @history_shipping.valid?
+      @history_shipping.save
+      redirect_to root_path
+    else
+      render :index, status: :unprocessable_entity
+    end
   end
 
   private
 
-  def hisstory_params
-    params.require(:hisstory_shipping).permit(:postal_code, :address, :phone_num, :prefecture_id, :building_name, :house_num).merge(:user_id,current_user.id)
-
+  def history_params
+    params.require(:history_shipping).permit(:postal_code, :address, :phone_num, :prefecture_id, :building_name, :house_num).merge(user_id: current_user.id, item_id: params[:item_id])
   end
+
+end
+
