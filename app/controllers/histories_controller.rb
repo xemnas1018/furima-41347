@@ -1,5 +1,7 @@
 class HistoriesController < ApplicationController
-  before_action :set_item, only:[:index, :create] 
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_item, only: [:index, :create] 
+  before_action :mismatch_user,only: [:index, :create]
 
   def index
 
@@ -27,6 +29,10 @@ class HistoriesController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
-
+  
+  def mismatch_user
+    return unless current_user.id == @item.user_id
+    redirect_to root_path
+  end
 end
 
