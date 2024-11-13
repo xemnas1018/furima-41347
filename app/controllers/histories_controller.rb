@@ -1,5 +1,8 @@
 class HistoriesController < ApplicationController
+  before_action :set_item, only:[:index, :create] 
+
   def index
+
     @history_shipping = HistoryShipping.new
   end
 
@@ -19,6 +22,10 @@ class HistoriesController < ApplicationController
 
   def history_params
     params.require(:history_shipping).permit(:postal_code, :address, :phone_num, :prefecture_id, :building_name, :house_num).merge(user_id: current_user.id, item_id: params[:item_id])
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
 end
