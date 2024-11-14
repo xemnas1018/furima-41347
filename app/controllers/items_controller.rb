@@ -2,12 +2,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :item_find_instance, only: [:edit, :update, :show, :destroy]
   before_action :matched_user_id, only: [:edit, :update, :destroy]
+  before_action :sold_check, only: [:edit]
 
   def index
     @items = Item.all.order('created_at DESC')
-    #@history = History.new
-    #@histories = @item.histories.include(:user) 
-    
   end
 
   def new
@@ -53,6 +51,12 @@ class ItemsController < ApplicationController
     return if current_user.id == @item.user_id
 
     redirect_to root_path
+  end
+
+  def sold_check
+    if @item.history.present?
+      redirect_to root_path
+    end
   end
 
   def item_find_instance
