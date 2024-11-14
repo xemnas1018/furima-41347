@@ -2,7 +2,7 @@ class HistoriesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create] 
   before_action :mismatch_user,only: [:index, :create]
-  before_action :sold_check, only: [:index]
+  #before_action :sold_check, only: [:index]
   before_action :set_history_shipping, only:[:index] 
 
   def index
@@ -40,8 +40,8 @@ class HistoriesController < ApplicationController
   end
 
   def sold_check
-    @history = History.find(params[:item_id])
-    return if  @history.item_id != @item.id
+    #@history_shipping = HistoryShipping.new
+    return if @history_shipping.item_id == @item.id
     redirect_to root_path
   end
 
