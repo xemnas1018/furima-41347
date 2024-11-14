@@ -8,7 +8,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-  has_many :histories
+  has_one :history
 
   validates :name, :item_comment, :price, :image, :user_id, presence: true
 

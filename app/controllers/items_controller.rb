@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('created_at DESC')
+    #@history = History.new
+    #@histories = @item.histories.include(:user) 
     
   end
 
