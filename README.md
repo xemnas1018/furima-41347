@@ -34,7 +34,7 @@
 ※user_id以外の〇〇_idカラムはActiveHashを使用。  
   
 ### Association 
-* belongs_to :user  設定済  
+* belongs_to :user   
 * has_one :history  
   
 ### ActiveHash  設定済み
@@ -54,7 +54,7 @@
 |house_num         |string |null: false                      |
 |building_name     |string |                                 |
 |phone_num         |string |null: false                      |
-|history           |references|null: false, foreign_key: true|
+|history           |references|null: false, foreign_key: true|  
 
 ### Association
 * belongs_to :history  
