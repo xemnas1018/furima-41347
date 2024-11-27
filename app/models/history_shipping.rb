@@ -10,7 +10,7 @@ class HistoryShipping
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
   def save
-    History.create(user_id:, item_id:)
+    history = History.create(user_id:, item_id:)
     Shipping.create(postal_code:, prefecture_id:, phone_num:, address:,
                     house_num:, building_name:, history_id: history.id)
   end
