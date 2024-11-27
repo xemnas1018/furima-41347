@@ -54,13 +54,12 @@ class ItemsController < ApplicationController
   end
 
   def sold_check
-    if @item.history.present?
-      redirect_to root_path
-    end
+    return unless @item.history.present?
+
+    redirect_to root_path
   end
 
   def item_find_instance
     @item = Item.find(params[:id])
   end
-
 end
