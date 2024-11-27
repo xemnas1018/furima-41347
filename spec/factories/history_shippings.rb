@@ -5,6 +5,7 @@ FactoryBot.define do
     house_num { Faker::Address.street_address }
     phone_num { Faker::PhoneNumber.cell_phone.gsub(/\D/, '')[0..10] }
     prefecture_id { Prefecture.where.not(id: 1).sample.id }
+    building_name {"マンション"}
     token { 'tok_abcdefghijk00000000000000000' }
   end
 end

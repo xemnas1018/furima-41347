@@ -33,10 +33,6 @@ class HistoriesController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def set_history_shipping
-    @history_shipping = HistoryShipping.new
-  end
-
   def mismatch_user
     return unless current_user.id == @item.user_id
 

@@ -1,7 +1,6 @@
 class HistoryShipping
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :address, :house_num, :building_name, :phone_num, :history_id,
-                :token
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :address, :house_num, :building_name, :phone_num, :token
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
@@ -13,6 +12,6 @@ class HistoryShipping
   def save
     History.create(user_id:, item_id:)
     Shipping.create(postal_code:, prefecture_id:, phone_num:, address:,
-                    house_num:, building_name:, history_id:)
+                    house_num:, building_name:, history_id: history.id)
   end
 end
