@@ -46,8 +46,8 @@ RSpec.describe HistoryShipping, type: :model do
         expect(@history_shipping.errors.full_messages).to include("Prefecture can't be blank")
       end
 
-      it 'prefecture_idが0では保存できない' do
-        @history_shipping.prefecture_id = 0
+      it 'prefecture_idが選択されていない状態では保存できない' do
+        @history_shipping.prefecture_id = 1
         @history_shipping.valid?
         expect(@history_shipping.errors.full_messages).to include("Prefecture can't be blank")
       end
